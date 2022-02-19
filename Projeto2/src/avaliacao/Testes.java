@@ -123,7 +123,7 @@ public class Testes {
 
 
         //Teste 6: Teste completo criando trabalhador, trilha, usuario, modulos e aplicando até o final da trilha
-        /*
+
         boolean[] perfilDeAcesso={true, true, true};
         Usuario usuario = new Usuario("luan", "123.456.789-01", "luankraika@hotmail.com", "Platelmintos93", perfilDeAcesso);
         Empresa empresa = new Empresa("empresa", "12.345.678/9123-45", SegEnum.ALI_BEB, "Cidade", "Estado",
@@ -161,7 +161,7 @@ public class Testes {
             e.printStackTrace();
         }
 
-         */
+
     }
 }
 
