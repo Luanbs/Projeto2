@@ -1,5 +1,6 @@
 package avaliacao;
 
+import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ public class Modulo {
     private String habilidades;
     private  String tarefa;
     private StatusEnum status;
+    //dias úteis
     private int prazoLimite;
+    //dias totais
+    private int prazoTotal;
     private OffsetDateTime dataModuloIniciado;
-    private OffsetDateTime dataAvaliacaoInicial;
     private OffsetDateTime dataModuloFinalizado;
     public static List<Modulo> modulos = new ArrayList<>();
 
@@ -34,8 +37,17 @@ public class Modulo {
                 this.dataModuloIniciado=OffsetDateTime.now();
             }
             if (status.isDisponivelAvaliar()){
-                this.dataAvaliacaoInicial=OffsetDateTime.now();
+
                 this.dataModuloFinalizado=OffsetDateTime.now();
+
+                int contagemDias=this.prazoLimite;
+                for (int i=0; i<contagemDias; i++){
+                    if (OffsetDateTime.now().plusDays(i).getDayOfWeek().equals(DayOfWeek.SATURDAY) ||
+                    OffsetDateTime.now().plusDays(i).getDayOfWeek().equals(DayOfWeek.SUNDAY)){
+                        contagemDias++;
+                    }
+                    this.prazoTotal++;
+                }
             }
         }else{
             throw new IllegalAccessException("Usuário não possui perfil de acesso: ADMINISTRATIVO");
@@ -58,8 +70,8 @@ public class Modulo {
         return status;
     }
 
-    public OffsetDateTime getDataAvaliacaoInicial() {
-        return dataAvaliacaoInicial;
+    public int getPrazoTotal(){
+        return prazoTotal;
     }
 
     public OffsetDateTime getDataModuloFinalizado() {

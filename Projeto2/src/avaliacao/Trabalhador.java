@@ -2,6 +2,7 @@ package avaliacao;
 
 import java.security.cert.TrustAnchor;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +52,8 @@ public class Trabalhador {
     }
 
     public void avaliacaoModulo(Modulo modulo, Double nota) {
-        if (modulo.getStatus().isDisponivelAvaliar()) {
+        if (modulo.getStatus().isDisponivelAvaliar() &&
+                OffsetDateTime.now().isAfter(modulo.getDataModuloFinalizado().plusDays(modulo.getPrazoTotal()))) {
             if (nota >= 0 && nota <= 10) {
                 this.avaliacoes.put(modulo, nota);
             }else{
